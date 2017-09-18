@@ -12,32 +12,32 @@ import org.junit.Test;
 
 public class TestLogging {
 
-	Logger log = Logger.getLogger(this.getClass().getName());
+    Logger log = Logger.getLogger(this.getClass().getName());
 
-	private EntityManagerFactory emf;
+    private EntityManagerFactory emf;
 
-	@Before
-	public void init() {
-		emf = Persistence.createEntityManagerFactory("my-persistence-unit");
-	}
+    @Before
+    public void init() {
+        emf = Persistence.createEntityManagerFactory("my-persistence-unit");
+    }
 
-	@After
-	public void close() {
-		emf.close();
-	}
+    @After
+    public void close() {
+        emf.close();
+    }
 
-	@Test
-	public void selectAuthors() {
-		log.info("... selectAuthors ...");
+    @Test
+    public void selectAuthors() {
+        log.info("... selectAuthors ...");
 
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
 
-		Query q = em.createQuery("SELECT a FROM Author a WHERE a.id = :id", Author.class);
-		q.setParameter("id", 1L);
-		q.getSingleResult();
+        Query q = em.createQuery("SELECT a FROM Author a WHERE a.id = :id", Author.class);
+        q.setParameter("id", 1L);
+        q.getSingleResult();
 
-		em.getTransaction().commit();
-		em.close();
-	}
+        em.getTransaction().commit();
+        em.close();
+    }
 }

@@ -19,91 +19,92 @@ import org.apache.log4j.Logger;
 @Entity
 public class Book implements Comparable<Book> {
 
-	@Transient
-	private Logger log = Logger.getLogger(Book.class.getSimpleName());
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, nullable = false)
-	private Long id;
+    @Transient
+    private Logger log = Logger.getLogger(Book.class.getSimpleName());
 
-	@Version
-	private int version;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
-	private String title;
+    @Version
+    private int version;
 
-	@ManyToMany
-	@JoinTable(name = "book_author", 
-				joinColumns = { @JoinColumn(name = "fk_book") }, 
-				inverseJoinColumns = { @JoinColumn(name = "fk_author") })
-	private List<Author> authors = new ArrayList<Author>();
+    private String title;
 
-	public Long getId() {
-		return this.id;
-	}
+    @ManyToMany
+    @JoinTable(name = "book_author",
+            joinColumns = {
+                @JoinColumn(name = "fk_book")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "fk_author")})
+    private List<Author> authors = new ArrayList<Author>();
 
-	public int getVersion() {
-		return this.version;
-	}
+    public Long getId() {
+        return this.id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public int getVersion() {
+        return this.version;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public List<Author> getAuthors() {
-		return authors;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setAuthors(List<Author> authors) {
-		this.authors = authors;
-	}
+    public List<Author> getAuthors() {
+        return authors;
+    }
 
-	public void addAuthor(Author a) {
-		this.authors.add(a);
-		a.getBooks().add(this);
-	}
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
 
-	public void removeAuthor(Author a) {
-		this.authors.remove(a);
-		a.getBooks().remove(this);
-	}
+    public void addAuthor(Author a) {
+        this.authors.add(a);
+        a.getBooks().add(this);
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof Book)) {
-			return false;
-		}
-		Book other = (Book) obj;
-		if (id != null) {
-			if (!id.equals(other.id)) {
-				return false;
-			}
-		}
-		return true;
-	}
+    public void removeAuthor(Author a) {
+        this.authors.remove(a);
+        a.getBooks().remove(this);
+    }
 
-	@Override
-	public int hashCode() {
-		return 31;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Book)) {
+            return false;
+        }
+        Book other = (Book) obj;
+        if (id != null) {
+            if (!id.equals(other.id)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public String toString() {
-		return "Book [id=" + id + ", title=" + title + "]";
-	}
+    @Override
+    public int hashCode() {
+        return 31;
+    }
 
-	@Override
-	public int compareTo(Book o) {
-		log.info("compare");
-		return title.compareTo(o.getTitle());
-	}
-	
-	
+    @Override
+    public String toString() {
+        return "Book [id=" + id + ", title=" + title + "]";
+    }
+
+    @Override
+    public int compareTo(Book o) {
+        log.info("compare");
+        return title.compareTo(o.getTitle());
+    }
+
 }

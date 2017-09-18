@@ -47,12 +47,12 @@ public class TestViewEntity {
 	
 	@Test
 	public void updateView() {
-		log.info("... updateView ...");
+	    log.info("... updateView ...");
 
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
+	    EntityManager em = emf.createEntityManager();
+	    em.getTransaction().begin();
 
-		BookView bv = em.find(BookView.class, 1L);
+	    BookView bv = em.find(BookView.class, 1L);
 	    log.info(bv);
 	    bv.setTitle("updated");
 	     

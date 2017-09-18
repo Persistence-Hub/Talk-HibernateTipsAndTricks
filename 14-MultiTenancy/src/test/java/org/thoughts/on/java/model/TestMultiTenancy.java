@@ -16,50 +16,50 @@ import org.thoughts.on.java.multitenancy.TenantIdResolver;
 
 public class TestMultiTenancy {
 
-	Logger log = Logger.getLogger(this.getClass().getName());
+    Logger log = Logger.getLogger(this.getClass().getName());
 
-	private SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
-	@Before
-	public void init() {
-		ServiceRegistry standardRegistry =
-		        new StandardServiceRegistryBuilder().build();
-		MetadataSources sources = new MetadataSources( standardRegistry ).addAnnotatedClass(Book.class);
-		Metadata metadata = sources.buildMetadata();
-		sessionFactory = metadata.buildSessionFactory();
-	}
+    @Before
+    public void init() {
+        ServiceRegistry standardRegistry
+                = new StandardServiceRegistryBuilder().build();
+        MetadataSources sources = new MetadataSources(standardRegistry).addAnnotatedClass(Book.class);
+        Metadata metadata = sources.buildMetadata();
+        sessionFactory = metadata.buildSessionFactory();
+    }
 
-	@After
-	public void close() {
-		sessionFactory.close();
-	}
-	
-	@Test
-	public void testMultiTenancy() {
-		log.info("... testMultiTenancy ...");
+    @After
+    public void close() {
+        sessionFactory.close();
+    }
 
-		((TenantIdResolver)((SessionFactoryImplementor)sessionFactory).getCurrentTenantIdentifierResolver()).setTenantIdentifier("tenant1");
-		Session session1 = sessionFactory.openSession();
-		Transaction tx1 = session1.getTransaction();
-		tx1.begin();
-		
-		Book b1 = new Book();
-		b1.setTitle("Book of tenant 1");
-		session1.persist(b1);
-		
-		tx1.commit();
-		session1.close();
-		
-		((TenantIdResolver)((SessionFactoryImplementor)sessionFactory).getCurrentTenantIdentifierResolver()).setTenantIdentifier("tenant2");
-		Session session2 = sessionFactory.openSession();
-		Transaction tx2 = session2.getTransaction();
-		tx2.begin();
-		
-		Book b2 = new Book();
-		b2.setTitle("Book of tenant 2");
-		session2.persist(b2);
-		
-		tx2.commit();
-		session2.close();
-	}
+    @Test
+    public void testMultiTenancy() {
+        log.info("... testMultiTenancy ...");
+
+        ((TenantIdResolver) ((SessionFactoryImplementor) sessionFactory).getCurrentTenantIdentifierResolver()).setTenantIdentifier("tenant1");
+        Session session1 = sessionFactory.openSession();
+        Transaction tx1 = session1.getTransaction();
+        tx1.begin();
+
+        Book b1 = new Book();
+        b1.setTitle("Book of tenant 1");
+        session1.persist(b1);
+
+        tx1.commit();
+        session1.close();
+
+        ((TenantIdResolver) ((SessionFactoryImplementor) sessionFactory).getCurrentTenantIdentifierResolver()).setTenantIdentifier("tenant2");
+        Session session2 = sessionFactory.openSession();
+        Transaction tx2 = session2.getTransaction();
+        tx2.begin();
+
+        Book b2 = new Book();
+        b2.setTitle("Book of tenant 2");
+        session2.persist(b2);
+
+        tx2.commit();
+        session2.close();
+    }
 }

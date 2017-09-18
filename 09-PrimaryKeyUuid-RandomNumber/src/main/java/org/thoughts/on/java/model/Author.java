@@ -11,71 +11,73 @@ import javax.persistence.Version;
 @Entity
 public class Author {
 
-	@Id
-	@GeneratedValue
-	@Column(name = "id", updatable = false, nullable = false)
-	private UUID id;
-	
-	@Version
-	private int version;
+    @Id
+    @GeneratedValue
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
-	private String firstName;
+    @Version
+    private int version;
 
-	private String lastName;
-	
-	public UUID getId() {
-		return this.id;
-	}
+    private String firstName;
 
-	public int getVersion() {
-		return this.version;
-	}
+    private String lastName;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public UUID getId() {
+        return this.id;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public int getVersion() {
+        return this.version;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof Author)) {
-			return false;
-		}
-		Author other = (Author) obj;
-		if (id != null) {
-			if (!id.equals(other.id)) {
-				return false;
-			}
-		}
-		return true;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	@Override
-	public int hashCode() {
-		return 31;
-	}
-	
-	@Override
-	public String toString() {
-		String result = getClass().getSimpleName() + " ";
-		if (firstName != null && !firstName.trim().isEmpty())
-			result += "firstName: " + firstName;
-		if (lastName != null && !lastName.trim().isEmpty())
-			result += ", lastName: " + lastName;
-		return result;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Author)) {
+            return false;
+        }
+        Author other = (Author) obj;
+        if (id != null) {
+            if (!id.equals(other.id)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
+
+    @Override
+    public String toString() {
+        String result = getClass().getSimpleName() + " ";
+        if (firstName != null && !firstName.trim().isEmpty()) {
+            result += "firstName: " + firstName;
+        }
+        if (lastName != null && !lastName.trim().isEmpty()) {
+            result += ", lastName: " + lastName;
+        }
+        return result;
+    }
 }

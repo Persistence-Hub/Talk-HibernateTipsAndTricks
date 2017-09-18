@@ -21,106 +21,109 @@ import org.hibernate.annotations.Parameter;
 
 @Entity
 public class Book {
-	
-	@Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(
-		name = "UUID",
-		strategy = "org.hibernate.id.UUIDGenerator",
-		parameters = {
-			@Parameter(
-				name = "uuid_gen_strategy_class",
-				value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
-			)
-		}
-	)
-	@Column(name = "id", updatable = false, nullable = false)
-	private UUID id;
 
-	@Version
-	private int version;
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator",
+            parameters = {
+                @Parameter(
+                        name = "uuid_gen_strategy_class",
+                        value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
+                )
+            }
+    )
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
-	private String title;
-	
-	private Double price;
+    @Version
+    private int version;
 
-	@Temporal(TemporalType.DATE)
-	private Date publishingDate;
+    private String title;
 
-	@ManyToMany
-	@JoinTable(
-		      name="BookAuthor",
-		      joinColumns={@JoinColumn(name="bookId", referencedColumnName="id")},
-		      inverseJoinColumns={@JoinColumn(name="authorId", referencedColumnName="id")})
-	private List<Author> authors = new ArrayList<Author>();
-	
-	public UUID getId() {
-		return this.id;
-	}
+    private Double price;
 
-	public int getVersion() {
-		return this.version;
-	}
+    @Temporal(TemporalType.DATE)
+    private Date publishingDate;
 
-	public String getTitle() {
-		return title;
-	}
+    @ManyToMany
+    @JoinTable(
+            name = "BookAuthor",
+            joinColumns = {
+                @JoinColumn(name = "bookId", referencedColumnName = "id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "authorId", referencedColumnName = "id")})
+    private List<Author> authors = new ArrayList<Author>();
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public UUID getId() {
+        return this.id;
+    }
 
-	public Date getPublishingDate() {
-		return publishingDate;
-	}
+    public int getVersion() {
+        return this.version;
+    }
 
-	public void setPublishingDate(Date publishingDate) {
-		this.publishingDate = publishingDate;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public List<Author> getAuthors() {
-		return authors;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setAuthors(List<Author> authors) {
-		this.authors = authors;
-	}
-	
-	public Double getPrice() {
-		return price;
-	}
+    public Date getPublishingDate() {
+        return publishingDate;
+    }
 
-	public void setPrice(Double price) {
-		this.price = price;
-	}
+    public void setPublishingDate(Date publishingDate) {
+        this.publishingDate = publishingDate;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof Book)) {
-			return false;
-		}
-		Book other = (Book) obj;
-		if (id != null) {
-			if (!id.equals(other.id)) {
-				return false;
-			}
-		}
-		return true;
-	}
+    public List<Author> getAuthors() {
+        return authors;
+    }
 
-	@Override
-	public int hashCode() {
-		return 31;
-	}
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
 
-	@Override
-	public String toString() {
-		String result = getClass().getSimpleName() + " ";
-		if (title != null && !title.trim().isEmpty())
-			result += "title: " + title;
-		return result;
-	}
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Book)) {
+            return false;
+        }
+        Book other = (Book) obj;
+        if (id != null) {
+            if (!id.equals(other.id)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
+
+    @Override
+    public String toString() {
+        String result = getClass().getSimpleName() + " ";
+        if (title != null && !title.trim().isEmpty()) {
+            result += "title: " + title;
+        }
+        return result;
+    }
 }

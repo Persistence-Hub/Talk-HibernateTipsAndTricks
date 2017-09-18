@@ -13,44 +13,44 @@ import org.junit.Test;
 
 public class TestAttributeConverter {
 
-	Logger log = Logger.getLogger(this.getClass().getName());
+    Logger log = Logger.getLogger(this.getClass().getName());
 
-	private EntityManagerFactory emf;
+    private EntityManagerFactory emf;
 
-	@Before
-	public void init() {
-		emf = Persistence.createEntityManagerFactory("my-persistence-unit");
-	}
+    @Before
+    public void init() {
+        emf = Persistence.createEntityManagerFactory("my-persistence-unit");
+    }
 
-	@After
-	public void close() {
-		emf.close();
-	}
+    @After
+    public void close() {
+        emf.close();
+    }
 
-	@Test
-	public void persistAndLoad() {
-		log.info("... persistAndLoad ...");
+    @Test
+    public void persistAndLoad() {
+        log.info("... persistAndLoad ...");
 
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
 
-		Author a = new Author();
-		a.setFirstName("John");
-		a.setLastName("Doe");
-		a.setDateOfBirth(LocalDate.of(1970, 1, 1));
-		
-		em.persist(a);
-		
-		em.getTransaction().commit();
-		em.close();
-		
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
+        Author a = new Author();
+        a.setFirstName("John");
+        a.setLastName("Doe");
+        a.setDateOfBirth(LocalDate.of(1970, 1, 1));
 
-		a = em.find(Author.class, a.getId());
-		log.info(a);
-		
-		em.getTransaction().commit();
-		em.close();
-	}
+        em.persist(a);
+
+        em.getTransaction().commit();
+        em.close();
+
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        a = em.find(Author.class, a.getId());
+        log.info(a);
+
+        em.getTransaction().commit();
+        em.close();
+    }
 }
