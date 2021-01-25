@@ -1,6 +1,8 @@
 package org.thoughts.on.java.model;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -57,6 +59,24 @@ public class TestDateAndTime {
 
         em.getTransaction().commit();
 
+        em.close();
+    }
+
+    @Test
+    public void persistZonedDateTime() {
+        log.info("... persistZonedDateTime ...");
+
+        EntityManager em = emf.createEntityManager();
+
+        // Persist a new Book entity
+        em.getTransaction().begin();
+
+        Book b = new Book();
+        b.setTitle("Hibernate Tips");
+        b.setLastReviewDateTime(ZonedDateTime.now(ZoneId.of("UTC")));
+        em.persist(b);
+
+        em.getTransaction().commit();
         em.close();
     }
 }

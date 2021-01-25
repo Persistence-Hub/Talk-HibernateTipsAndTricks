@@ -14,70 +14,71 @@ import javax.persistence.Version;
 @Entity
 public class Publisher {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, nullable = false)
-	private Long id;
-	
-	@Version
-	private int version;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
-	private String name;
+    @Version
+    private int version;
 
-	@OneToMany(mappedBy = "publisher")
-	private Set<Book> books = new HashSet<Book>();
+    private String name;
 
-	public Long getId() {
-		return this.id;
-	}
+    @OneToMany(mappedBy = "publisher")
+    private Set<Book> books = new HashSet<Book>();
 
-	public int getVersion() {
-		return this.version;
-	}
+    public Long getId() {
+        return this.id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public int getVersion() {
+        return this.version;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Set<Book> getBooks() {
-		return this.books;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setBooks(final Set<Book> books) {
-		this.books = books;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof Publisher)) {
-			return false;
-		}
-		Publisher other = (Publisher) obj;
-		if (id != null) {
-			if (!id.equals(other.id)) {
-				return false;
-			}
-		}
-		return true;
-	}
+    public Set<Book> getBooks() {
+        return this.books;
+    }
 
-	@Override
-	public int hashCode() {
-		return 31;
-	}
+    public void setBooks(final Set<Book> books) {
+        this.books = books;
+    }
 
-	@Override
-	public String toString() {
-		String result = getClass().getSimpleName() + " ";
-		if (name != null && !name.trim().isEmpty())
-			result += "name: " + name;
-		return result;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Publisher)) {
+            return false;
+        }
+        Publisher other = (Publisher) obj;
+        if (id != null) {
+            if (!id.equals(other.id)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
+
+    @Override
+    public String toString() {
+        String result = getClass().getSimpleName() + " ";
+        if (name != null && !name.trim().isEmpty()) {
+            result += "name: " + name;
+        }
+        return result;
+    }
 }

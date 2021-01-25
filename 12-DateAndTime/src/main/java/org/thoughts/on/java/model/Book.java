@@ -1,6 +1,8 @@
 package org.thoughts.on.java.model;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,6 +27,8 @@ public class Book {
     private Double price;
 
     private LocalDate publishingDate;
+
+    private ZonedDateTime lastReviewDateTime;
 
     public Long getId() {
         return this.id;
@@ -58,6 +62,14 @@ public class Book {
         this.price = price;
     }
 
+    public ZonedDateTime getLastReviewDateTime() {
+        return lastReviewDateTime;
+    }
+
+    public void setLastReviewDateTime(ZonedDateTime lastReviewDateTime) {
+        this.lastReviewDateTime = lastReviewDateTime;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -82,8 +94,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", version=" + version + ", title=" + title
-                + ", price=" + price + ", publishingDate=" + publishingDate
-                + "]";
+        return "Book [id=" + id + ", lastReview=" + lastReviewDateTime + ", price=" + price + ", publishingDate="
+                + publishingDate + ", title=" + title + ", version=" + version + "]";
     }
 }

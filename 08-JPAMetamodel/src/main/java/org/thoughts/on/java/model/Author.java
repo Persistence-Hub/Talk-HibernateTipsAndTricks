@@ -1,18 +1,18 @@
 package org.thoughts.on.java.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Version;
 
 @Entity
-public class Publisher {
+public class Author {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,10 +22,12 @@ public class Publisher {
 	@Version
 	private int version;
 
-	private String name;
+	private String firstName;
 
-	@OneToMany(mappedBy = "publisher")
-	private Set<Book> books = new HashSet<Book>();
+	private String lastName;
+
+	@ManyToMany(mappedBy="authors")
+	private List<Book> books = new ArrayList<Book>();
 
 	public Long getId() {
 		return this.id;
@@ -35,31 +37,39 @@ public class Publisher {
 		return this.version;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public Set<Book> getBooks() {
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public List<Book> getBooks() {
 		return this.books;
 	}
 
-	public void setBooks(final Set<Book> books) {
+	public void setBooks(final List<Book> books) {
 		this.books = books;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Publisher)) {
+		if (!(obj instanceof Author)) {
 			return false;
 		}
-		Publisher other = (Publisher) obj;
+		Author other = (Author) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -72,12 +82,14 @@ public class Publisher {
 	public int hashCode() {
 		return 31;
 	}
-
+	
 	@Override
 	public String toString() {
 		String result = getClass().getSimpleName() + " ";
-		if (name != null && !name.trim().isEmpty())
-			result += "name: " + name;
+		if (firstName != null && !firstName.trim().isEmpty())
+			result += "firstName: " + firstName;
+		if (lastName != null && !lastName.trim().isEmpty())
+			result += ", lastName: " + lastName;
 		return result;
 	}
 }

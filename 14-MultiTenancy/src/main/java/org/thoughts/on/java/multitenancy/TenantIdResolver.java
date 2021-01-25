@@ -4,19 +4,19 @@ import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 
 public class TenantIdResolver implements CurrentTenantIdentifierResolver {
 
-	private String tenantIdentifier;
+    private String tenantIdentifier;
 
-	@Override
-	public String resolveCurrentTenantIdentifier() {
-		return tenantIdentifier;
-	}
+    @Override
+    public String resolveCurrentTenantIdentifier() {
+        return tenantIdentifier;
+    }
 
-	@Override
-	public boolean validateExistingCurrentSessions() {
-		return false;
-	}
+    @Override
+    public boolean validateExistingCurrentSessions() {
+        return false;
+    }
 
-	public void setTenantIdentifier(String tenantIdentifier) {
-		this.tenantIdentifier = tenantIdentifier;
-	}
+    public void setTenantIdentifier(String tenantIdentifier) {
+        this.tenantIdentifier = tenantIdentifier;
+    }
 }
