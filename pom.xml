@@ -3,38 +3,29 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.thoughts.on.java.recipes</groupId>
+	<groupId>com.thorben.janssen.talks</groupId>
 	<artifactId>HibernateTips</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<hibernate.version>5.2.10.Final</hibernate.version>
+		<hibernate5.version>5.6.15.Final</hibernate5.version>
+		<hibernate.version>6.3.0.Final</hibernate.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.hibernate</groupId>
+				<groupId>org.hibernate.orm</groupId>
 				<artifactId>hibernate-core</artifactId>
 				<version>${hibernate.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-entitymanager</artifactId>
-				<version>${hibernate.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-jpamodelgen</artifactId>
-				<version>${hibernate.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate.javax.persistence</groupId>
-				<artifactId>hibernate-jpa-2.1-api</artifactId>
-				<version>1.0.0.Final</version>
+				<artifactId>hibernate-core-jakarta</artifactId>
+				<version>${hibernate5.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
@@ -45,18 +36,24 @@
 			<dependency>
 				<groupId>org.postgresql</groupId>
 				<artifactId>postgresql</artifactId>
-				<version>9.4.1208</version>
+				<version>42.2.23</version>
 				<scope>test</scope>
 			</dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>2.17.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>2.17.1</version>
+                <scope>test</scope>
+            </dependency>
 			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>1.2.17</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.7.16</version>
+				<groupId>jakarta.xml.bind</groupId>
+				<artifactId>jakarta.xml.bind-api</artifactId>
+				<version>3.0.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -85,19 +82,15 @@
 	</build>
 	<modules>
 		<module>01-LogQueryExecutionTime</module>
-		<module>02-QueryPagination</module>
-		<module>03-JoinUnassociatedEntities</module>
-		<module>04-Formula</module>
-		<module>05-DatabaseViews</module>
-		<module>06-OrderRelationships</module>
-		<module>07-SortRelationshipsNatural</module>
-		<module>08-SortRelationshipsCustom</module>
-		<module>09-PrimaryKeyUuid-RandomNumber</module>
-		<module>10-PrimaryKeyUuid-IP</module>
-		<module>11-MapOptionalAssociations</module>
-		<module>12-DateAndTime</module>
-		<module>13-AttributeConverterForDateAndTime</module>
-		<module>14-MultiTenancy</module>
-		<module>15-Auditing</module>
+		<module>02-JoinUnassociatedEntities</module>
+		<module>03-DatabaseViews</module>
+		<module>04-OrderAssociation</module>
+		<module>05-KeepAssociationOrder</module>
+		<module>06-PrimaryKeyUuid</module>
+		<module>07-MapOptionalAssociations</module>
+		<module>08-EmbeddableRecord</module>
+		<module>09-SimplifiedJsonMapping</module>
+		<module>10-MultiTenancy</module>
+		<module>11-Auditing</module>
 	</modules>
 </project>

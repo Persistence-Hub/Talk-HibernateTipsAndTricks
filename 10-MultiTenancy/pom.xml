@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>jar</packaging>
+	<artifactId>10-MultiTenancy</artifactId>
+	<parent>
+		<groupId>com.thorben.janssen.talks</groupId>
+		<artifactId>HibernateTips</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.hibernate.orm</groupId>
@@ -29,11 +36,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<artifactId>01-LogQueryExecutionTime</artifactId>
-	<parent>
-		<groupId>com.thorben.janssen.talks</groupId>
-		<artifactId>HibernateTips</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>..</relativePath>
-	</parent>
 </project>

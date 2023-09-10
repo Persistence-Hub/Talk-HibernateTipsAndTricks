@@ -29,7 +29,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<artifactId>01-LogQueryExecutionTime</artifactId>
+	<artifactId>06-KeepAssociationOrder</artifactId>
 	<parent>
 		<groupId>com.thorben.janssen.talks</groupId>
 		<artifactId>HibernateTips</artifactId>

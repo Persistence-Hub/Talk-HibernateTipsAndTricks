@@ -1,0 +1,24 @@
+version: '3.5'
+
+services:
+  postgres-hibtips:
+    container_name: postgres-hibtips
+    build: ./postgres/
+    ports:
+     - 5432:5432
+    environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+  
+  pgadmin-hibtips:
+    container_name: pgadmin-hibtips
+    build: ./pgadmin/
+    ports:
+      - 80:80
+    environment:
+        PGADMIN_DEFAULT_EMAIL: test@postgresql.org
+        PGADMIN_DEFAULT_PASSWORD: postgres
+    links:
+      - postgres-hibtips
+    logging:
+      driver: "none"
