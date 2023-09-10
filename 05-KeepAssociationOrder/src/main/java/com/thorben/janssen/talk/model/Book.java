@@ -33,7 +33,7 @@ public class Book {
 		      name="BookAuthor",
 		      joinColumns={@JoinColumn(name="bookId", referencedColumnName="id")},
 		      inverseJoinColumns={@JoinColumn(name="authorId", referencedColumnName="id")})
-	// @OrderColumn
+	@OrderColumn
 	private List<Author> authors = new ArrayList<Author>();
 	
 	public Long getId() {
